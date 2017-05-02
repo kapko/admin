@@ -1,0 +1,45 @@
+<a 
+  [routerLink]="['../create']"
+  class="btn-floating btn-large waves-effect waves-light red btn-right"><i class="material-icons">add</i></a>
+  
+<div class="row">
+  <div class="input-field col s12">
+    <input 
+      required
+      [(ngModel)]="findText"
+      type="text"
+      class="validate">
+    <label for="last_name">Find post </label>
+  </div>
+</div>
+
+<table class="striped post-page">
+  <thead>
+    <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let post of posts 
+    | find : ['name', 'about'] : findText; 
+    let i = index;">
+      <td>{{ i }}</td>
+      <td>{{ post.name }}</td>
+      <td class="action">
+      {{ post._id }}
+        <i
+          [routerLink]="['../edit', post._id]" 
+          class="material-icons btn-right">mode_edit</i>
+        <i 
+        (click)="names = post"
+        toast
+        data-target="modal1" 
+        class="material-icons btn-right">delete</i>{{ post.about }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<delete-dialog [postData]="names"></delete-dialog>

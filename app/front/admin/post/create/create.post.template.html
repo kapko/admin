@@ -1,0 +1,57 @@
+<h4 class="flow-text center-align">Create new post </h4>
+<div class="row top-padding">
+    <form
+      #form="ngForm"
+      (ngSubmit)="createPost(form)"
+      class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input 
+            required
+            name="name"
+            [ngModel]="name"
+            type="text"
+            class="validate">
+          <label for="last_name">Title</label>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="input-field col s12">
+          <input type="text" class="validate">
+          <label for="last_name">Link</label>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea 
+            name="about"
+            required
+            [ngModel]="about"
+            class="materialize-textarea"></textarea>
+          <label for="textarea1">Textarea</label>
+        </div>
+      </div>
+
+    <!-- <div class="file-field input-field">
+        <div class="btn blue darken-4">
+            <span>Upload images</span>
+            <input type="file" multiple>
+        </div>
+    </div>
+
+    <div class="list-of-picture">
+        <img src="http://lorempixel.com/580/250/nature/4">
+        <img src="http://lorempixel.com/580/250/nature/4">
+        <img src="http://lorempixel.com/580/250/nature/4">
+        <img src="http://lorempixel.com/580/250/nature/4">
+        <img src="http://lorempixel.com/580/250/nature/4">
+    </div> -->
+      <a 
+        routerLink="../show"
+        class="waves-effect waves-light btn red">Cancel</a>
+      <button 
+        type="submit" 
+        class="waves-effect waves-light btn blue">Submit</button>
+    </form>
+</div>

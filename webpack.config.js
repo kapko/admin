@@ -7,20 +7,11 @@ var webpackConfig = {
   entry: {
     'main': './app/main.ts',
   },
-
   output: {
     publicPath: '',
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './dist/'),
+    filename: '[name].js',
   },
-
-  plugins: [
-    new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)src(\\|\/)linker/,
-      path.resolve(__dirname, './src'),
-      {}
-    ),
-  ],
-
   module: {
     loaders: [
       {
@@ -32,31 +23,21 @@ var webpackConfig = {
         ]
       },
       { test: /\.css$/, loaders: ['to-string-loader', 'css-loader'] },
-      { test: /\.html$/, loader: 'raw-loader' }
+      { test: /\.html$/, loader: 'raw-loader' },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader'
+      },
     ]
   }
-
 };
 
-
-// Our Webpack Defaults
 var defaultConfig = {
-  devtool: 'source-map',
-
-  output: {
-    filename: '[name].js',
-    sourceMapFilename: '[name].map',
-    chunkFilename: '[id].chunk.js'
-  },
-
   resolve: {
-    extensions: [ '.ts', '.js' ],
+    extensions: [ '.ts', '.js', '.less'],
     modules: [ path.resolve(__dirname, 'node_modules') ]
   },
-
   devServer: {
-    port: 3000,
-    contentBase: './app/',
     inline: true,
     historyApiFallback: true,
     watchOptions: { aggregateTimeout: 300, poll: 1000 },
@@ -66,7 +47,6 @@ var defaultConfig = {
       "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
     }
   },
-
   node: {
     global: true,
     crypto: 'empty',
@@ -78,6 +58,4 @@ var defaultConfig = {
     setImmediate: false
   }
 };
-
-
 module.exports = webpackMerge(defaultConfig, webpackConfig);

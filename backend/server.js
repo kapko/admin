@@ -1,18 +1,23 @@
-let express = require('express'),
+const express = require('express'),
 	app = express(),
 	bodyParser = require('body-parser');
-	// ejs = require('ejs');
+	ejs = require('ejs'),
+	about = require('./routes/about.js');
+
 app
 	.use(bodyParser.urlencoded())
 	.use(bodyParser.json())
-	// .use(express.static(__dirname + '/'));
-	// .set('views', __dirname + '/src')
-	// .engine('html', ejs.renderFile)
-	// .set('view engine', 'html');
+	.use(express.static(__dirname + '/../dist/'))
+	.set('views', __dirname + '/../dist/')
+	.engine('html', ejs.renderFile)
+	.set('view engine', 'html')
+	.listen('8080', ()=>{});
 
-app.get('/admin', (req, res) => {
-	res.send('admin');
-});
+// API //
+app
+	.use('/api/about', about);
 
-app.listen('8000', ()=>{});
+app
+	.get('/', (req, res) => res.render('./index.html'))
+	.get('**', (req, res) => res.render('index.html'));
 
