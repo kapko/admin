@@ -1,12 +1,8 @@
 import { NgModule, Component } from '@angular/core'
 import { RouterModule } from '@angular/router';
-
-@Component({
-	selector: 'home',
-	template: `<h1>Hello Worl</h1>`
-})
-
-export class HomeComponent{}
+// modules
+import {MenuComponent} from './partials/menu.component.ts'
+import {HomeComponent} from './home.component.ts'
 
 const routes = [
 	{
@@ -15,8 +11,10 @@ const routes = [
 	}
 ]
 
+
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, MenuComponent],
+  exports: [MenuComponent],
   imports: [
     RouterModule.forChild(routes)
   ],
