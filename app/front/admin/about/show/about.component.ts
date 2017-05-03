@@ -7,11 +7,9 @@ import {Router} from '@angular/router'
 }) 
 
 export class About{
-	
 	constructor(
 		@Inject('dates') private data
 	){
-		console.log(123123);
-		console.log(this.data);
+		
 	}
 }
